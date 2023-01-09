@@ -1,6 +1,9 @@
 import { previewData } from 'next/headers';
 import { groq } from 'next-sanity';
-
+import { client } from '../../utils/sanity.client';
+import PreviewSuspense from '../../components/PreviewSuspense';
+import PreviewBlogList from '../../components/PreviewBlogList';
+import BlogList from '../../components/BlogList';
 const query = groq`
 *[_type == "post"] {
   ...,
@@ -9,13 +12,19 @@ const query = groq`
 } | order(_createdAt desc)
 `;
 
-export default function HomePage() {
+export default async function HomePage() {
   if (previewData()) {
-    return <div>Preview Mode</div>;
+    return (
+      <PreviewSuspense fallback="Loading preview...">
+        <PreviewBlogList query={query} />
+      </PreviewSuspense>
+    );
   }
+  const posts = await client.fetch(query);
+
   return (
     <div>
-      <h1>Home Page</h1>
+      <BlogList posts={posts} />
     </div>
   );
 }
