@@ -5,16 +5,15 @@ import { schemaTypes } from './schemas';
 import { myTheme } from './theme';
 import StudioNavbar from './components/StudioNavbar';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const projectId: any = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset: any = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
 export default defineConfig({
   name: 'Content_Studio',
   title: 'Content Studio',
   basePath: '/studio',
-  projectId,
-  dataset,
-
+  projectId: projectId,
+  dataset: dataset,
   plugins: [deskTool(), visionTool()],
 
   schema: {
