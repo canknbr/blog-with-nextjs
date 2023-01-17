@@ -26,5 +26,5 @@ Features
 Blog page management and routing with Next.js
 Data management for blog posts and categories with Sanity.io
 Design of the blog pages with Tailwind CSS
-License
-This project is licensed under the MIT license.
+
+
